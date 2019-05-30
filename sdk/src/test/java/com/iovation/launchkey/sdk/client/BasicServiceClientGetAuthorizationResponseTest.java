@@ -1,28 +1,24 @@
 package com.iovation.launchkey.sdk.client;
 
 import com.iovation.launchkey.sdk.domain.service.AuthorizationResponse;
-import com.iovation.launchkey.sdk.domain.webhook.AuthorizationResponseWebhookPackage;
-import com.iovation.launchkey.sdk.domain.webhook.ServiceUserSessionEndWebhookPackage;
-import com.iovation.launchkey.sdk.domain.webhook.WebhookPackage;
-import com.iovation.launchkey.sdk.error.InvalidRequestException;
 import com.iovation.launchkey.sdk.transport.Transport;
-import com.iovation.launchkey.sdk.transport.domain.*;
+import com.iovation.launchkey.sdk.transport.domain.EntityIdentifier;
+import com.iovation.launchkey.sdk.transport.domain.ServiceV3AuthsGetResponse;
 import junit.framework.TestCase;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.UUID;
 
-import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.*;
 
 
 @RunWith(Enclosed.class)

@@ -19,7 +19,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @JsonIgnoreProperties(value = {"geoFenceLocations", "geoFences", "timeFences", "deviceIntegrity"}, ignoreUnknown = true)
 public class ServicePolicy extends AuthPolicy {

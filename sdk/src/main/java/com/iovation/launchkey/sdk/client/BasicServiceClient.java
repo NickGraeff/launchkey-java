@@ -12,22 +12,18 @@
 
 package com.iovation.launchkey.sdk.client;
 
+import com.iovation.launchkey.sdk.domain.service.AuthPolicy;
 import com.iovation.launchkey.sdk.domain.service.AuthorizationRequest;
+import com.iovation.launchkey.sdk.domain.service.AuthorizationResponse;
 import com.iovation.launchkey.sdk.domain.service.DenialReason;
 import com.iovation.launchkey.sdk.domain.webhook.AuthorizationResponseWebhookPackage;
 import com.iovation.launchkey.sdk.domain.webhook.ServiceUserSessionEndWebhookPackage;
+import com.iovation.launchkey.sdk.domain.webhook.WebhookPackage;
 import com.iovation.launchkey.sdk.error.*;
 import com.iovation.launchkey.sdk.transport.Transport;
 import com.iovation.launchkey.sdk.transport.domain.*;
-import com.iovation.launchkey.sdk.domain.service.AuthPolicy;
-import com.iovation.launchkey.sdk.domain.service.AuthorizationResponse;
-import com.iovation.launchkey.sdk.domain.webhook.WebhookPackage;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @SuppressWarnings("DuplicateThrows")
 public class BasicServiceClient implements ServiceClient {
