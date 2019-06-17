@@ -13,6 +13,7 @@
 package com.iovation.launchkey.sdk.integration.steps;
 
 import com.iovation.launchkey.sdk.domain.service.AuthPolicy;
+import com.iovation.launchkey.sdk.error.InvalidPolicyInput;
 import com.iovation.launchkey.sdk.integration.managers.DirectoryDeviceManager;
 import com.iovation.launchkey.sdk.integration.managers.DirectoryServiceAuthsManager;
 import cucumber.api.java.After;
@@ -61,12 +62,12 @@ public class ServiceAuthorizationPolicySteps {
     }
 
     @Given("the current Authorization Policy requires a geofence with a radius of {double}, a latitude of {double}, and a longitude of {double}")
-    public void theCurrentAuthorizationPolicyRequiresAGeofenceOf(double radius, double latitude, double longitude) {
+    public void theCurrentAuthorizationPolicyRequiresAGeofenceOf(double radius, double latitude, double longitude) throws InvalidPolicyInput {
         directoryServiceAuthsManager.addLocation(new AuthPolicy.Location(radius, latitude, longitude));
     }
 
     @Given("the current Authorization Policy requires a geofence with a radius of {double}, a latitude of {double}, a longitude of {double}, and named {string}")
-    public void theCurrentAuthorizationPolicyRequiresAGeofenceOfName(double radius, double latitude, double longitude, String name) {
+    public void theCurrentAuthorizationPolicyRequiresAGeofenceOfName(double radius, double latitude, double longitude, String name) throws InvalidPolicyInput {
         directoryServiceAuthsManager.addLocation(new AuthPolicy.Location(name, radius, latitude, longitude));
     }
 }

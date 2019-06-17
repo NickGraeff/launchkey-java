@@ -34,16 +34,16 @@ public class ServiceV3AuthsPostRequestPolicyTest {
                             "\"priority\":1," +
                             "\"attributes\":{" +
                                 "\"locations\":[" +
-                                    "{\"radius\":1.1,\"latitude\":2.1,\"longitude\":3.1}," +
-                                    "{\"radius\":1.2,\"latitude\":2.2,\"longitude\":3.2}" +
+                                    "{\"radius\":100.1,\"latitude\":2.1,\"longitude\":3.1}," +
+                                    "{\"radius\":100.2,\"latitude\":2.2,\"longitude\":3.2}" +
                                 "]" +
                             "}" +
                         "}" +
                     "]" +
                 "}";
         @SuppressWarnings("deprecation") ServiceV3AuthsPostRequestPolicy policy = new ServiceV3AuthsPostRequestPolicy(2, true, true, true);
-        policy.addGeoFence(1.1, 2.1, 3.1);
-        policy.addGeoFence(1.2, 2.2, 3.2);
+        policy.addGeoFence(100.1, 2.1, 3.1);
+        policy.addGeoFence(100.2, 2.2, 3.2);
         String actual = new ObjectMapper().writeValueAsString(policy);
         assertEquals(expected, actual);
     }

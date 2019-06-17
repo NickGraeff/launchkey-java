@@ -201,7 +201,7 @@ public class CucumberGuiceInjectorSource implements InjectorSource {
                 driver = new SampleAppAndroidDriver(appiumUrl, getDesiredCapabilities());
                 mobileDriver = driver;
             } catch (Exception e) {
-                addError("Could not load platform driver, make sure Appium.url is set to the correct value", e);
+                addError("Could not load platform driver, make sure Appium.url and Capability.app are set to the correct values", e);
             }
 
             String commandTimeoutString = getPropertyElseAddError(Capability.new_command_timeout);
@@ -245,7 +245,7 @@ public class CucumberGuiceInjectorSource implements InjectorSource {
         }
 
         private void addInvalidPropertyError(String prop) {
-            addError(new Message("Property \""+ prop + "\"\" not provided or invalid. Cannot run tests without this property"));
+            addError(new Message("Property \""+ prop + "\" not provided or invalid. Cannot run tests without this property"));
         }
 
         private String getPropertyElseAddError(String prop) {

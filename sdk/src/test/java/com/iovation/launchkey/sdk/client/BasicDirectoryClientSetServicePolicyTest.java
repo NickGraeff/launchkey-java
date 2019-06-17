@@ -82,12 +82,12 @@ public class BasicDirectoryClientSetServicePolicyTest {
     @Test
     public void setsLocations() throws Exception {
         when(servicePolicy.getLocations()).thenReturn(Arrays.asList(
-                new ServicePolicy.Location("Location 1", 1.1, 1.2, 1.3),
-                new ServicePolicy.Location("Location 2", 2.1, 2.2, 2.3)
+                new ServicePolicy.Location("Location 1", 100.1, 1.2, 1.3),
+                new ServicePolicy.Location("Location 2", 200.1, 2.2, 2.3)
         ));
         List<Location> expected = Arrays.asList(
-                new Location("Location 1", 1.1, 1.2, 1.3),
-                new Location("Location 2", 2.1, 2.2, 2.3)
+                new Location("Location 1", 100.1, 1.2, 1.3),
+                new Location("Location 2", 200.1, 2.2, 2.3)
 
         );
         client.setServicePolicy(serviceId, servicePolicy);

@@ -18,9 +18,9 @@ public final class Capability {
     public static final String automation_name = "Capability.automation_name";
 
     public static final class Android {
-        public static final String app_package = "Capability.android.app_package";
-        public static final String appWaitActivity = "Capability.android.appWaitActivity";
-        public static final String appActivity = "Capability.android.appActivity";
+        public static final String app_package = "Capability.Android.app_package";
+        public static final String appWaitActivity = "Capability.Android.appWaitActivity";
+        public static final String appActivity = "Capability.Android.appActivity";
     }
 
     public static final class iOS {

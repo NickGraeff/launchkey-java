@@ -15,6 +15,8 @@ package com.iovation.launchkey.sdk.transport.domain;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.iovation.launchkey.sdk.error.InvalidPolicyInput;
+import com.iovation.launchkey.sdk.error.InvalidResponseException;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -57,7 +59,7 @@ public class AuthPolicy {
     public AuthPolicy(@JsonProperty("minimum_requirements") List<MinimumRequirement> minimumRequirements,
                       @JsonProperty("factors") ArrayNode factors, @JsonProperty("requirement") String requirement,
                       @JsonProperty("types") List<String> types, @JsonProperty("amount") Integer input_amount,
-                      @JsonProperty("geofences") List<AuthPolicy.Location> geofences) {
+                      @JsonProperty("geofences") List<AuthPolicy.Location> geofences) throws InvalidPolicyInput {
         if (requirement != null) {
             geoFenceLocations = geofences;
             deviceIntegrity = null;
@@ -127,11 +129,11 @@ public class AuthPolicy {
         }
     }
 
-    public void addGeoFence(double radius, double latitude, double longitude) {
+    public void addGeoFence(double radius, double latitude, double longitude) throws InvalidPolicyInput {
         addGeoFence(null, radius, latitude, longitude);
     }
 
-    public void addGeoFence(String name, double radius, double latitude, double longitude) {
+    public void addGeoFence(String name, double radius, double latitude, double longitude) throws InvalidPolicyInput {
         geoFenceLocations.add(new Location(name, radius, latitude, longitude));
     }
 
@@ -307,7 +309,12 @@ public class AuthPolicy {
 
         @JsonCreator
         public Location(@JsonProperty("name") String name, @JsonProperty("radius") double radius,
-                        @JsonProperty("latitude") double latitude, @JsonProperty("longitude") double longitude) {
+                        @JsonProperty("latitude") double latitude, @JsonProperty("longitude") double longitude) throws InvalidPolicyInput {
+
+            if (radius < 100.0) {
+                throw new InvalidPolicyInput("Radius for a Location may not be less than the minimum of 100.0 meters.", null, null);
+            }
+
             this.name = name;
             this.radius = radius;
             this.latitude = latitude;

@@ -11,6 +11,9 @@ package com.iovation.launchkey.sdk.transport.domain; /**
  */
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidDefinitionException;
+import com.iovation.launchkey.sdk.error.InvalidPolicyInput;
+import com.iovation.launchkey.sdk.error.InvalidResponseException;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -37,8 +40,8 @@ public class AuthPolicyTest {
                             "\"priority\":1," +
                             "\"attributes\":{" +
                                 "\"locations\":[" +
-                                    "{\"radius\":1.1,\"latitude\":2.1,\"longitude\":3.1}," +
-                                    "{\"radius\":1.2,\"latitude\":2.2,\"longitude\":3.2}" +
+                                    "{\"radius\":100.1,\"latitude\":2.1,\"longitude\":3.1}," +
+                                    "{\"radius\":100.2,\"latitude\":2.2,\"longitude\":3.2}" +
                                 "]" +
                             "}" +
                         "},{" +
@@ -52,8 +55,8 @@ public class AuthPolicyTest {
                     "]" +
                 "}";
         AuthPolicy policy = new AuthPolicy(2, true, true, true, true);
-        policy.addGeoFence(1.1, 2.1, 3.1);
-        policy.addGeoFence(1.2, 2.2, 3.2);
+        policy.addGeoFence(100.1, 2.1, 3.1);
+        policy.addGeoFence(100.2, 2.2, 3.2);
         String actual = new ObjectMapper().writeValueAsString(policy);
         assertEquals(expected, actual);
     }
@@ -76,8 +79,8 @@ public class AuthPolicyTest {
                             "\"priority\":1," +
                             "\"attributes\":{" +
                                 "\"locations\":[" +
-                                    "{\"radius\":1.1,\"latitude\":2.1,\"longitude\":3.1}," +
-                                    "{\"radius\":1.2,\"latitude\":2.2,\"longitude\":3.2}" +
+                                    "{\"radius\":100.1,\"latitude\":2.1,\"longitude\":3.1}," +
+                                    "{\"radius\":100.2,\"latitude\":2.2,\"longitude\":3.2}" +
                                 "]" +
                             "}" +
                         "},{" +
@@ -89,8 +92,8 @@ public class AuthPolicyTest {
                     "]" +
                 "}";
         AuthPolicy expected = new AuthPolicy(2, true, true, true, true);
-        expected.addGeoFence(1.1, 2.1, 3.1);
-        expected.addGeoFence(1.2, 2.2, 3.2);
+        expected.addGeoFence(100.1, 2.1, 3.1);
+        expected.addGeoFence(100.2, 2.2, 3.2);
         AuthPolicy actual = new ObjectMapper().readValue(json, AuthPolicy.class);
         assertEquals(expected, actual);
     }
@@ -171,5 +174,21 @@ public class AuthPolicyTest {
         expected.addGeoFence("asdf", 200.0, 36.120825, -115.157216);
         AuthPolicy actual = new ObjectMapper().readValue(policy, AuthPolicy.class);
         assertEquals(expected, actual);
+    }
+    @Test(expected = InvalidDefinitionException.class)
+    public void objectMapperThrowsExceptionForAuthResponsePolicyWithJustGeofencesAndAInvalidGeofenceRadius() throws Exception {
+        String policy =
+                "{\n" +
+                        "  \"requirement\": null,\n" +
+                        "  \"geofences\": [\n" +
+                        "    {\n" +
+                        "      \"name\": \"asdf\",\n" +
+                        "      \"latitude\": 36.120825,\n" +
+                        "      \"longitude\": -115.157216,\n" +
+                        "      \"radius\": 1\n" +
+                        "    }\n" +
+                        "  ]\n" +
+                        "}";
+        AuthPolicy actual = new ObjectMapper().readValue(policy, AuthPolicy.class);
     }
 }

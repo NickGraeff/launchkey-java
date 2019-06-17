@@ -12,6 +12,8 @@
 
 package com.iovation.launchkey.sdk.domain.service;
 
+import com.iovation.launchkey.sdk.error.InvalidPolicyInput;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -187,7 +189,7 @@ public class AuthPolicy {
          * @param latitude Latitude of the geolocation
          * @param longitude Longitude of the geolocation
          */
-        public Location(double radius, double latitude, double longitude) {
+        public Location(double radius, double latitude, double longitude) throws InvalidPolicyInput {
             this(null, radius, latitude, longitude);
         }
 
@@ -197,7 +199,12 @@ public class AuthPolicy {
          * @param latitude Latitude of the geolocation
          * @param longitude Longitude of the geolocation
          */
-        public Location(String name, double radius, double latitude, double longitude) {
+        public Location(String name, double radius, double latitude, double longitude) throws InvalidPolicyInput {
+
+            if (radius < 100.0) {
+                throw new InvalidPolicyInput("Radius for a Location may not be less than the minimum of 100.0 meters.", null, null);
+            }
+
             this.radius = radius;
             this.latitude = latitude;
             this.longitude = longitude;

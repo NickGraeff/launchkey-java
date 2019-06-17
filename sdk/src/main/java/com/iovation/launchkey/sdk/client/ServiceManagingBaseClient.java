@@ -13,6 +13,8 @@
 package com.iovation.launchkey.sdk.client;
 
 import com.iovation.launchkey.sdk.domain.servicemanager.ServicePolicy;
+import com.iovation.launchkey.sdk.error.InvalidPolicyInput;
+import com.iovation.launchkey.sdk.error.InvalidResponseException;
 import com.iovation.launchkey.sdk.transport.domain.AuthPolicy;
 
 import java.util.ArrayList;
@@ -54,7 +56,7 @@ class ServiceManagingBaseClient {
     }
 
     com.iovation.launchkey.sdk.transport.domain.ServicePolicy getTransportServicePolicyFromDomainServicePolicy(
-            ServicePolicy policy) {
+            ServicePolicy policy) throws InvalidResponseException {
         com.iovation.launchkey.sdk.transport.domain.ServicePolicy transportPolicy =
                 new com.iovation.launchkey.sdk.transport.domain.ServicePolicy(policy.getRequiredFactors(),
                         policy.isInherenceFactorRequired(), policy.isKnowledgeFactorRequired(),
@@ -69,8 +71,11 @@ class ServiceManagingBaseClient {
         }
 
         for (ServicePolicy.Location location : policy.getLocations()) {
-            transportPolicy.addGeoFence(location.getName(), location.getRadius(), location.getLatitude(),
-                    location.getLongitude());
+            try {
+                transportPolicy.addGeoFence(location.getName(), location.getRadius(), location.getLatitude(), location.getLongitude());
+            } catch (InvalidPolicyInput e) {
+                throw new InvalidResponseException("The AuthPolicy received from the LaunchKey API had an invalid radius value.", e, null);
+            }
         }
         return transportPolicy;
     }

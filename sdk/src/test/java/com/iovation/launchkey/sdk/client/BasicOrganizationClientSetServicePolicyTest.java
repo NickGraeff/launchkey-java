@@ -81,12 +81,12 @@ public class BasicOrganizationClientSetServicePolicyTest {
     @Test
     public void setsLocations() throws Exception {
         when(servicePolicy.getLocations()).thenReturn(Arrays.asList(
-                new ServicePolicy.Location("Location 1", 1.1, 1.2, 1.3),
-                new ServicePolicy.Location("Location 2", 2.1, 2.2, 2.3)
+                new ServicePolicy.Location("Location 1", 100.1, 1.2, 1.3),
+                new ServicePolicy.Location("Location 2", 200.1, 2.2, 2.3)
         ));
         List<AuthPolicy.Location> expected = Arrays.asList(
-                new AuthPolicy.Location("Location 1", 1.1, 1.2, 1.3),
-                new AuthPolicy.Location("Location 2", 2.1, 2.2, 2.3)
+                new AuthPolicy.Location("Location 1", 100.1, 1.2, 1.3),
+                new AuthPolicy.Location("Location 2", 200.1, 2.2, 2.3)
 
         );
         client.setServicePolicy(serviceId, servicePolicy);

@@ -48,8 +48,8 @@ public class ServicePolicyTest {
                         "\"priority\":1," +
                         "\"attributes\":{" +
                         "\"locations\":[" +
-                        "{\"radius\":1.1,\"latitude\":2.1,\"longitude\":3.1}," +
-                        "{\"radius\":1.2,\"latitude\":2.2,\"longitude\":3.2}" +
+                        "{\"radius\":100.1,\"latitude\":2.1,\"longitude\":3.1}," +
+                        "{\"radius\":100.2,\"latitude\":2.2,\"longitude\":3.2}" +
                         "]" +
                         "}" +
                         "},{" +
@@ -73,8 +73,8 @@ public class ServicePolicyTest {
                         "]" +
                         "}";
         ServicePolicy policy = new ServicePolicy(2, true, true, true, true);
-        policy.addGeoFence(1.1, 2.1, 3.1);
-        policy.addGeoFence(1.2, 2.2, 3.2);
+        policy.addGeoFence(100.1, 2.1, 3.1);
+        policy.addGeoFence(100.2, 2.2, 3.2);
         policy.addTimeFence(
                 new TimeFence("tf1", Arrays.asList("Monday", "Tuesday", "Wednesday"), 0, 23, 0, 59,
                         "America/Los_Angeles"));
@@ -137,8 +137,8 @@ public class ServicePolicyTest {
                         "\"priority\":1," +
                         "\"attributes\":{" +
                         "\"locations\":[" +
-                        "{\"radius\":1.1,\"latitude\":2.1,\"longitude\":3.1}," +
-                        "{\"radius\":1.2,\"latitude\":2.2,\"longitude\":3.2}" +
+                        "{\"radius\":100.1,\"latitude\":2.1,\"longitude\":3.1}," +
+                        "{\"radius\":100.2,\"latitude\":2.2,\"longitude\":3.2}" +
                         "]" +
                         "}" +
                         "},{" +
@@ -160,8 +160,8 @@ public class ServicePolicyTest {
                         "]" +
                         "}";
         ServicePolicy expected = new ServicePolicy(2, true, true, true, true);
-        expected.addGeoFence(1.1, 2.1, 3.1);
-        expected.addGeoFence(1.2, 2.2, 3.2);
+        expected.addGeoFence(100.1, 2.1, 3.1);
+        expected.addGeoFence(100.2, 2.2, 3.2);
         expected.addTimeFence(
                 new TimeFence("tf1", Arrays.asList("Monday", "Tuesday", "Wednesday"), 0, 23, 0, 59,
                         "America/Los_Angeles"));

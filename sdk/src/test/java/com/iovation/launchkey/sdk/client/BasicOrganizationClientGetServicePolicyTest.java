@@ -136,12 +136,12 @@ public class BasicOrganizationClientGetServicePolicyTest {
     @Test
     public void getsGeoFences() throws Exception {
         List<ServicePolicy.Location> fences = Arrays.asList(
-                new ServicePolicy.Location("Location 1", 1.1, 1.2, 1.3),
-                new ServicePolicy.Location("Location 2", 2.1, 2.2, 2.3)
+                new ServicePolicy.Location("Location 1", 100.1, 1.2, 1.3),
+                new ServicePolicy.Location("Location 2", 200.1, 2.2, 2.3)
         );
         List<Location> expected = Arrays.asList(
-                new Location("Location 1", 1.1, 1.2, 1.3),
-                new Location("Location 2", 2.1, 2.2, 2.3)
+                new Location("Location 1", 100.1, 1.2, 1.3),
+                new Location("Location 2", 200.1, 2.2, 2.3)
         );
         when(response.getGeoFences()).thenReturn(fences);
         assertEquals(expected, client.getServicePolicy(serviceId).getLocations());

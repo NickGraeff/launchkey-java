@@ -24,7 +24,7 @@ public class AuthPolicyLocationTest {
 
     @Before
     public void setUp() throws Exception {
-        location = new AuthPolicy.Location(1.1, 2.2, 3.3);
+        location = new AuthPolicy.Location(100.1, 2.2, 3.3);
     }
 
     @After
@@ -44,7 +44,7 @@ public class AuthPolicyLocationTest {
 
     @Test
     public void getRadius() throws Exception {
-        assertEquals(1.1, location.getRadius(), 0.001);
+        assertEquals(100.1, location.getRadius(), 0.001);
     }
 
     @Test

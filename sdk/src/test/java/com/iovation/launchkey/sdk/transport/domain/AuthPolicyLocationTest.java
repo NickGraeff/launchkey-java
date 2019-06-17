@@ -21,57 +21,57 @@ import static org.junit.Assert.assertThat;
 public class AuthPolicyLocationTest {
     @Test
     public void getName() throws Exception {
-        assertEquals("Expected", new AuthPolicy.Location("Expected", 1.0, 2.0, 3.0).getName());
+        assertEquals("Expected", new AuthPolicy.Location("Expected", 100.0, 2.0, 3.0).getName());
     }
 
     @Test
     public void getRadius() throws Exception {
-        assertEquals(1.0, new AuthPolicy.Location("Expected", 1.0, 2.0, 3.0).getRadius(), 0.0);
+        assertEquals(100.0, new AuthPolicy.Location("Expected", 100.0, 2.0, 3.0).getRadius(), 0.0);
     }
 
     @Test
     public void getLatitude() throws Exception {
-        assertEquals(2.0, new AuthPolicy.Location("Expected", 1.0, 2.0, 3.0).getLatitude(), 0.0);
+        assertEquals(2.0, new AuthPolicy.Location("Expected", 100.0, 2.0, 3.0).getLatitude(), 0.0);
     }
 
     @Test
     public void getLongitude() throws Exception {
-        assertEquals(3.0, new AuthPolicy.Location("Expected", 1.0, 2.0, 3.0).getLongitude(), 0.0);
+        assertEquals(3.0, new AuthPolicy.Location("Expected", 100.0, 2.0, 3.0).getLongitude(), 0.0);
     }
 
     @Test
     public void equalsIsTrueForSameValues() throws Exception {
-        assertTrue(new AuthPolicy.Location("name", 1.0, 2.0, 3.0)
-                .equals(new AuthPolicy.Location("name", 1.0, 2.0, 3.0)));
+        assertTrue(new AuthPolicy.Location("name", 100.0, 2.0, 3.0)
+                .equals(new AuthPolicy.Location("name", 100.0, 2.0, 3.0)));
     }
 
     @Test
     public void equalsIsTFalseForDifferentName() throws Exception {
-        assertFalse(new AuthPolicy.Location("name1", 1.0, 2.0, 3.0)
-                .equals(new AuthPolicy.Location("name2", 1.0, 2.0, 3.0)));
+        assertFalse(new AuthPolicy.Location("name1", 100.0, 2.0, 3.0)
+                .equals(new AuthPolicy.Location("name2", 100.0, 2.0, 3.0)));
     }
 
     @Test
     public void equalsIsTFalseForDifferentRadius() throws Exception {
-        assertFalse(new AuthPolicy.Location("name", 1.1, 2.0, 3.0)
-                .equals(new AuthPolicy.Location("name", 1.2, 2.0, 3.0)));
+        assertFalse(new AuthPolicy.Location("name", 100.1, 2.0, 3.0)
+                .equals(new AuthPolicy.Location("name", 100.2, 2.0, 3.0)));
     }
 
     @Test
     public void equalsIsTFalseForDifferentLatitude() throws Exception {
-        assertFalse(new AuthPolicy.Location("name", 1.0, 2.1, 3.0)
-                .equals(new AuthPolicy.Location("name", 1.0, 2.2, 3.0)));
+        assertFalse(new AuthPolicy.Location("name", 100.0, 2.1, 3.0)
+                .equals(new AuthPolicy.Location("name", 100.0, 2.2, 3.0)));
     }
 
     @Test
     public void equalsIsTFalseForDifferentLongitude() throws Exception {
-        assertFalse(new AuthPolicy.Location("name", 1.0, 2.0, 3.1)
-                .equals(new AuthPolicy.Location("name", 1.0, 2.0, 3.2)));
+        assertFalse(new AuthPolicy.Location("name", 100.0, 2.0, 3.1)
+                .equals(new AuthPolicy.Location("name", 100.0, 2.0, 3.2)));
     }
 
     @Test
     public void toStringContainsClassName() throws Exception {
-        assertThat(new AuthPolicy.Location(null, 1.0, 2.0, 3.0).toString(),
+        assertThat(new AuthPolicy.Location(null, 100.0, 2.0, 3.0).toString(),
                 containsString(AuthPolicy.Location.class.getSimpleName()));
     }
 

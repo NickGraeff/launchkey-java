@@ -53,8 +53,8 @@ public class BasicServiceClientAuthorizeTest {
         when(transport.serviceV3AuthsPost(any(ServiceV3AuthsPostRequest.class), any(EntityIdentifier.class)))
                 .thenReturn(response);
         requiredFactorsPolicy = new AuthPolicy(99, true, Arrays.asList(
-                new AuthPolicy.Location(1, 1.1, 1.2),
-                new AuthPolicy.Location(2, 2.1, 2.2)
+                new AuthPolicy.Location(100, 1.1, 1.2),
+                new AuthPolicy.Location(200, 2.1, 2.2)
         ));
     }
 
@@ -234,8 +234,8 @@ public class BasicServiceClientAuthorizeTest {
         client.authorize(user, null, requiredFactorsPolicy);
         verify(transport).serviceV3AuthsPost(requestCaptor.capture(), any(EntityIdentifier.class));
         List<com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location> expected = Arrays.asList(
-                new com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location(null, 1, 1.1, 1.2),
-                new com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location(null, 2, 2.1, 2.2)
+                new com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location(null, 100, 1.1, 1.2),
+                new com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location(null, 200, 2.1, 2.2)
         );
         assertEquals(expected, requestCaptor.getValue().getPolicy().getGeoFences());
     }
@@ -244,13 +244,13 @@ public class BasicServiceClientAuthorizeTest {
     public void sendsExpectedPolicyGeoFencesAndTheGeofenceHasANameWithPolicy() throws Exception {
         client.authorize(user, null, new AuthPolicy(99, true,
                 Arrays.asList(
-                        new AuthPolicy.Location("asdf1", 1, 1.1, 1.2),
-                        new AuthPolicy.Location("asdf2", 2, 2.1, 2.2)
+                        new AuthPolicy.Location("asdf1", 100, 1.1, 1.2),
+                        new AuthPolicy.Location("asdf2", 200, 2.1, 2.2)
         )));
         verify(transport).serviceV3AuthsPost(requestCaptor.capture(), any(EntityIdentifier.class));
         List<com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location> expected = Arrays.asList(
-                new com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location("asdf1", 1, 1.1, 1.2),
-                new com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location("asdf2", 2, 2.1, 2.2)
+                new com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location("asdf1", 100, 1.1, 1.2),
+                new com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location("asdf2", 200, 2.1, 2.2)
         );
         assertEquals(expected, requestCaptor.getValue().getPolicy().getGeoFences());
     }

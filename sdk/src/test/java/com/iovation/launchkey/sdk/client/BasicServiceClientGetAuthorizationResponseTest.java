@@ -624,35 +624,35 @@ public class BasicServiceClientGetAuthorizationResponseTest extends TestCase {
 
         @Test
         public void testNullNameTransfers() throws Exception {
-            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location(null, 1.0, 2.0, 3.0)));
+            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location(null, 100.0, 2.0, 3.0)));
             AuthorizationResponse response = client.getAuthorizationResponse(UUID.randomUUID().toString());
             assertNull(response.getPolicy().getLocations().get(0).getName());
         }
 
         @Test
         public void testNameTransfers() throws Exception {
-            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location("name", 1.0, 2.0, 3.0)));
+            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location("name", 100.0, 2.0, 3.0)));
             AuthorizationResponse response = client.getAuthorizationResponse(UUID.randomUUID().toString());
             assertEquals("name", response.getPolicy().getLocations().get(0).getName());
         }
 
         @Test
         public void testRadiusTransfers() throws Exception {
-            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location("name", 1.0, 2.0, 3.0)));
+            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location("name", 100.0, 2.0, 3.0)));
             AuthorizationResponse response = client.getAuthorizationResponse(UUID.randomUUID().toString());
-            assertEquals(1.0, response.getPolicy().getLocations().get(0).getRadius());
+            assertEquals(100.0, response.getPolicy().getLocations().get(0).getRadius());
         }
 
         @Test
         public void testLatitudeTransfers() throws Exception {
-            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location("name", 1.0, 2.0, 3.0)));
+            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location("name", 100.0, 2.0, 3.0)));
             AuthorizationResponse response = client.getAuthorizationResponse(UUID.randomUUID().toString());
             assertEquals(2.0, response.getPolicy().getLocations().get(0).getLatitude());
         }
 
         @Test
         public void testLongitudeTransfers() throws Exception {
-            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location("name", 1.0, 2.0, 3.0)));
+            when(policy.getGeoFences()).thenReturn(Arrays.asList(new AuthPolicy.Location("name", 100.0, 2.0, 3.0)));
             AuthorizationResponse response = client.getAuthorizationResponse(UUID.randomUUID().toString());
             assertEquals(3.0, response.getPolicy().getLocations().get(0).getLongitude());
         }

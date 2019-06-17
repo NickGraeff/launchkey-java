@@ -138,13 +138,13 @@ public class BasicDirectoryClientGetServicePolicyTest {
     @Test
     public void getsGeoFences() throws Exception {
         List<ServicePolicy.Location> fences = Arrays.asList(
-                new ServicePolicy.Location("Location 1", 1.1, 1.2, 1.3),
-                new ServicePolicy.Location("Location 2", 2.1, 2.2, 2.3)
+                new ServicePolicy.Location("Location 1", 100.1, 1.2, 1.3),
+                new ServicePolicy.Location("Location 2", 200.1, 2.2, 2.3)
         );
         List<com.iovation.launchkey.sdk.domain.servicemanager.ServicePolicy.Location> expected = Arrays.asList(
-                new com.iovation.launchkey.sdk.domain.servicemanager.ServicePolicy.Location("Location 1", 1.1, 1.2,
+                new com.iovation.launchkey.sdk.domain.servicemanager.ServicePolicy.Location("Location 1", 100.1, 1.2,
                         1.3),
-                new com.iovation.launchkey.sdk.domain.servicemanager.ServicePolicy.Location("Location 2", 2.1, 2.2, 2.3)
+                new com.iovation.launchkey.sdk.domain.servicemanager.ServicePolicy.Location("Location 2", 200.1, 2.2, 2.3)
         );
         when(response.getGeoFences()).thenReturn(fences);
         assertEquals(expected, client.getServicePolicy(serviceId).getLocations());

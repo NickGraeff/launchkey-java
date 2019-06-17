@@ -150,7 +150,7 @@ public class BasicServiceClient implements ServiceClient {
         return response;
     }
 
-    private AuthorizationResponse getAuthorizationResponse(AuthsResponse authsResponse) {
+    private AuthorizationResponse getAuthorizationResponse(AuthsResponse authsResponse) throws InvalidResponseException {
         AuthorizationResponse.Type type = getType(authsResponse);
         AuthorizationResponse.Reason reason = getReason(authsResponse);
         AuthPolicy policy = getAuthPolicy(authsResponse);
@@ -173,7 +173,7 @@ public class BasicServiceClient implements ServiceClient {
         return response;
     }
 
-    private AuthPolicy getAuthPolicy(AuthsResponse authsResponse) {
+    private AuthPolicy getAuthPolicy(AuthsResponse authsResponse) throws InvalidResponseException {
         AuthPolicy policy;
 
         if (authsResponse.getAuthPolicy() == null) {
@@ -249,15 +249,20 @@ public class BasicServiceClient implements ServiceClient {
         return authMethods;
     }
 
-    private List<AuthPolicy.Location> getLocations(AuthsResponse authsResponse) {
+    private List<AuthPolicy.Location> getLocations(AuthsResponse authsResponse) throws InvalidResponseException {
         List<AuthPolicy.Location> locations;
         if (authsResponse.getAuthPolicy().getGeoFences() == null) {
             locations = null;
         } else {
             locations = new ArrayList<>();
             for (com.iovation.launchkey.sdk.transport.domain.AuthPolicy.Location location : authsResponse.getAuthPolicy().getGeoFences()) {
-                locations.add(new AuthPolicy.Location(location.getName(), location.getRadius(), location.getLatitude(),
-                        location.getLongitude()));
+                AuthPolicy.Location newLocation;
+                try {
+                    newLocation = new AuthPolicy.Location(location.getName(), location.getRadius(), location.getLatitude(), location.getLongitude());
+                } catch (InvalidPolicyInput e) {
+                    throw new InvalidResponseException("The AuthPolicy received from the LaunchKey API had an invalid radius value.", e, null);
+                }
+                locations.add(newLocation);
             }
         }
         return locations;

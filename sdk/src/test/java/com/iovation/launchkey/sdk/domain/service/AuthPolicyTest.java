@@ -182,21 +182,21 @@ public class AuthPolicyTest {
     @Test
     public void getLocationsReturnsEquivalentListForRequiredFactorsLocationsConstructor() throws Exception {
         List<AuthPolicy.Location> expected = new ArrayList<>();
-        expected.add(new AuthPolicy.Location(1.1, 2.2, 3.3));
+        expected.add(new AuthPolicy.Location(100.1, 2.2, 3.3));
         assertEquals(expected, new AuthPolicy(99, expected).getLocations());
     }
 
     @Test
     public void getLocationsReturnsEquivalentListForRequiredFactorsJailbreakProtectionLocationsConstructor() throws Exception {
         List<AuthPolicy.Location> expected = new ArrayList<>();
-        expected.add(new AuthPolicy.Location(1.1, 2.2, 3.3));
+        expected.add(new AuthPolicy.Location(100.1, 2.2, 3.3));
         assertEquals(expected, new AuthPolicy(99, true, expected).getLocations());
     }
 
     @Test
     public void getLocationsReturnsEquivalentListForLocationsConstructor() throws Exception {
         List<AuthPolicy.Location> expected = new ArrayList<>();
-        expected.add(new AuthPolicy.Location(1.1, 2.2, 3.3));
+        expected.add(new AuthPolicy.Location(100.1, 2.2, 3.3));
         assertEquals(expected, new AuthPolicy(expected).getLocations());
     }
 
@@ -209,21 +209,21 @@ public class AuthPolicyTest {
     @Test
     public void getLocationsReturnsEquivalentListForFactorRequiredLocationsConstructor() throws Exception {
         List<AuthPolicy.Location> expected = new ArrayList<>();
-        expected.add(new AuthPolicy.Location(1.1, 2.2, 3.3));
+        expected.add(new AuthPolicy.Location(100.1, 2.2, 3.3));
         assertEquals(expected, new AuthPolicy(true, true, true, expected).getLocations());
     }
 
     @Test
     public void getLocationsReturnsEquivalentListForFactorRequiredJailbreakProtectionLocationsConstructor() throws Exception {
         List<AuthPolicy.Location> expected = new ArrayList<>();
-        expected.add(new AuthPolicy.Location(1.1, 2.2, 3.3));
+        expected.add(new AuthPolicy.Location(100.1, 2.2, 3.3));
         assertEquals(expected, new AuthPolicy(true, true, true, true, expected).getLocations());
     }
 
     @Test
     public void getLocationsIsNotTheSameListPassedInConstructor() throws Exception {
         List<AuthPolicy.Location> expected = new ArrayList<>();
-        expected.add(new AuthPolicy.Location(1.1, 2.2, 3.3));
+        expected.add(new AuthPolicy.Location(100.1, 2.2, 3.3));
         assertNotSame(expected, new AuthPolicy(expected).getLocations());
     }
 

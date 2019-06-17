@@ -18,6 +18,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.iovation.launchkey.sdk.error.InvalidPolicyInput;
 
 import java.util.*;
 
@@ -32,7 +33,7 @@ public class ServicePolicy extends AuthPolicy {
 
     @JsonCreator
     public ServicePolicy(@JsonProperty("minimum_requirements") List<MinimumRequirement> minimumRequirements,
-                         @JsonProperty("factors") ArrayNode factors) {
+                         @JsonProperty("factors") ArrayNode factors) throws InvalidPolicyInput {
         super(minimumRequirements, factors, null, null, null, null);
         List<TimeFence> timeFences = new ArrayList<>();
         try {
